@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Financial transaction (income or expense)",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "category": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "amount", "type", "category", "date"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "Monthly budget limit",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "month": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "category", "amount", "month"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Custom user data",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "currency": { "type": "string" },
+        "onboarded": { "type": "boolean" }
+      }
+    }
+  },
+  "firestore": {
+    "transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User transactions"
+    },
+    "budgets/{budgetId}": {
+      "schema": "Budget",
+      "description": "User budgets"
+    },
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile metadata"
+    }
+  }
+}
